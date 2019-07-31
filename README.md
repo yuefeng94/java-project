@@ -1,2 +1,3 @@
 # java-project
-IDEA + JDK1.8
+ ## 环境
+ ``` IDEA + JDK1.8 ```

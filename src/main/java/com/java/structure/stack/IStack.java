@@ -6,7 +6,9 @@ public interface IStack<T> {
 
     public T pop();
 
+    public T peek();
+
     public Boolean empty();
 
-    public T peek();
+    public Boolean full();
 }

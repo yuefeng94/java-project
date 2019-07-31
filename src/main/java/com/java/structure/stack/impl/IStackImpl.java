@@ -2,6 +2,11 @@ package com.java.structure.stack.impl;
 
 import com.java.structure.stack.IStack;
 
+/**
+ * 线程非安全
+ *
+ * @param <T>
+ */
 public class IStackImpl<T> implements IStack<T> {
 
     public final static Integer DEFAULT_SIZE = 5;
@@ -21,7 +26,7 @@ public class IStackImpl<T> implements IStack<T> {
 
     @Override
     public T push(T t) {
-        if (this.depth == this.stackData.length - 1) {
+        if (full()) {
             throw new RuntimeException("stack is full");
         }
         this.stackData[depth++] = t;
@@ -34,12 +39,8 @@ public class IStackImpl<T> implements IStack<T> {
             throw new RuntimeException("stack is empty");
         }
         T t = this.stackData[--this.depth];
+        this.stackData[this.depth] = null;
         return t;
-    }
-
-    @Override
-    public Boolean empty() {
-        return this.stackData.length == 0 || this.depth == 0;
     }
 
     @Override
@@ -48,5 +49,15 @@ public class IStackImpl<T> implements IStack<T> {
             throw new RuntimeException("stack is empty");
         }
         return this.stackData[this.depth - 1];
+    }
+
+    @Override
+    public Boolean empty() {
+        return this.stackData.length == 0 || this.depth == 0;
+    }
+
+    @Override
+    public Boolean full() {
+        return this.depth == this.stackData.length - 1;
     }
 }
